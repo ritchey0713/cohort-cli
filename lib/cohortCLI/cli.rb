@@ -9,7 +9,25 @@ class CohortCLI::CLI
     puts "Hello there!"
     puts "GETTING DATA FROM API... PLEASE WAIT"
     puts "CREATING NEW OBJS"
+    display_info
   end
+
+  def display_info
+    puts "please make selection:"
+    input = gets.strip.downcase
+    
+    if input == "actors"
+      puts "============ACTORS LIST============"
+      puts "LIST OF ACTORS/OBJS"
+      display_info
+    elsif input == "movies" 
+      puts "============MOVIES LIST============"
+      puts "LIST OF MOVIES/OBJS"
+      display_info
+    else 
+      quit
+    end 
+  end 
 
   # deal with inputs (loop to keep asking to get new info )
   # EX. while input != "exit" do 
@@ -19,13 +37,8 @@ class CohortCLI::CLI
   # condition to check input for good value 
   # else tell them try again
 
-  # exit command
-  # if input == "EXIT"
-  # kill program, say good bye
-
-
-
-
-
+  def quit 
+    puts "Goodbye"
+  end 
 end
   
