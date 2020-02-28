@@ -1,44 +1,45 @@
 class CohortCLI::CLI 
   
-  #start shoulld greet user, maybe give desc 
-  # get data from scraper/api file 
-  #create new custom objs
-  # all inside start method
-
   def start 
     puts "Hello there!"
-    puts "GETTING DATA FROM API... PLEASE WAIT"
-    puts "CREATING NEW OBJS"
-    display_info
+    puts "-------------"
+    puts "Please enter a movie title below:"
+    input = gets.strip.downcase
+    if(input != "quit")
+      @data = CohortCLI::API.get_movies(input)
+      @objects = CohortCLI::Movie.all
+      display_info
+    else
+      quit
+    end
   end
 
   def display_info
-    puts "please make selection:"
-    input = gets.strip.downcase
-    
-    if input == "actors"
-      puts "============ACTORS LIST============"
-      puts "LIST OF ACTORS/OBJS"
-      display_info
-    elsif input == "movies" 
-      puts "============MOVIES LIST============"
-      puts "LIST OF MOVIES/OBJS"
-      display_info
-    else 
-      quit
-    end 
-  end 
+    puts "Here is your list:"
+    puts "------------------"
+    @objects.each.with_index(1) {|movie, index| puts "#{index}. #{movie.title}"}
 
-  # deal with inputs (loop to keep asking to get new info )
-  # EX. while input != "exit" do 
-  # display a list of something, or give examples of what we expect as input  
-  # get user input 
-  # depending on what we get, do something 
-  # condition to check input for good value 
-  # else tell them try again
+    puts "please make a selection by index number:"
+    input = gets.strip.downcase
+    #@movie = @objects[input.to_i - 1]
+    if(input.to_i > 0)
+      @movie = @objects[input.to_i - 1]
+      puts "#{@movie.year}"
+      display_info
+    elsif (input == "quit")
+      quit
+    elsif (input == "menu")
+      start
+    else 
+      puts "Oops"
+      display_info
+    end 
+    
+  end 
 
   def quit 
     puts "Goodbye"
   end 
+
 end
   

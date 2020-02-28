@@ -3,9 +3,13 @@
 
 require "cohortCLI/version"
 require "cohortCLI/cli"
+require "cohortCLI/api"
+require "cohortCLI/movie"
 
 # dependencies 
 require "pry"
+require "httparty"
+
 
 module CohortCLI
   class Error < StandardError; end
